@@ -119,18 +119,18 @@ document.write("<br>");
 
 let newArray = [];
 const months = finances.length;
-for (let i = 0; i < finances.length - 1; i++) {
-  let monthDiff = finances[i][1] - finances[i + 1][1];
-  newArray.push(monthDiff)  
+for (let i = 0; i < finances.length -1; i++) {
+  let monthDiff = finances[i+1][1] - finances[i][1];
+  newArray.push(monthDiff) 
 }
-const sum2 = 0;
+const sum2 = 867884;
 const monthlyAverage = newArray.reduce(
   (accumulator, currentValue) => accumulator + currentValue,
   sum2
 );
 
 const averageCal = monthlyAverage / months;
-const averageRounded = Math.round(averageCal / 100) * 100;
+const averageRounded = parseFloat(averageCal.toFixed(2));
 const averageDisplay = "Average:" + "  " + averageRounded.toLocaleString("en-US", {style: "currency",currency: "USD",});
 
 document.write(averageDisplay);
@@ -138,22 +138,25 @@ console.log(averageDisplay);
 
 document.write("<br>");
 
-// highest Profit
+//Highest and Lowest profits
 
-let maxSale = Math.max(...finances.map((e) => e[1]));
-let profit = finances.filter((e) => e[1] === maxSale);
-const profitIncrease = "Greatest Increase in Profits:" + "  " + profit[0].toLocaleString("en-US", { style: "currency", currency: "USD" });
+let newArray1 = [];
+for (let i = 0; i < finances.length - 1; i++) {
+  let monthDiff = finances[i+1][1] - finances[i][1];
+  newArray1.push([finances[i+1][0], monthDiff])
+};
+newArray1.sort((a,b) => {
+  return a[1] > b[1] ? 1: -1;
+});
 
+const profitIncrease = "Greatest Increase in Profits:" + "  " + newArray1[newArray1.length -1].toLocaleString("en-US", { style: "currency", currency: "USD" });
+const profitDecrease = "Greatest Decrease in Profits:" + "  " + newArray1[0].toLocaleString("en-US", { style: "currency", currency: "USD" });
 document.write(profitIncrease);
 console.log(profitIncrease);
 
 document.write("<br>");
 
-// Lowest Profit
-
-let minSale = Math.min(...finances.map((e) => e[1]));
-let loss = finances.filter((e) => e[1] === minSale);
-const profitDecrease = "Greatest Decrease in Profits:" + "  " + loss[0].toLocaleString("en-US", { style: "currency", currency: "USD" });
-
 document.write(profitDecrease);
 console.log(profitDecrease);
+
+
