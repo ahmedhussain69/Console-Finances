@@ -86,3 +86,81 @@ const finances = [
   ["Jan-2017", 138230],
   ["Feb-2017", 671099],
 ];
+
+// Total Months
+
+const totalMonths = finances.length;
+{
+  const totalMonthDisplay = "Total Months:" + "  " + totalMonths;
+  document.write(totalMonthDisplay);
+
+  console.log(totalMonthDisplay);
+}
+
+document.write("<br>");
+
+// Yearly Total
+
+let sum = 0;
+for (let i = 0; i < finances.length; i++) {
+  for (let j = 0; j < finances[i].length; j++)
+    if (typeof finances[i][j] === "number") {
+      sum += finances[i][j];
+    }
+}
+const total =
+  "Total :" +
+  "  " +
+  sum.toLocaleString("en-US", { style: "currency", currency: "USD" });
+document.write(total);
+console.log(sum);
+
+document.write("<br>");
+
+// Average sales Profit
+let sum2 = 0;
+const months = finances.length;
+for (let i = 0; i < finances.length - 1; i++) {
+  let monthDiff = finances[i][1] - finances[i + 1][1];
+  const newArray = [monthDiff];
+  newArray.forEach((item) => {
+    sum2 += item;
+  });
+}
+const averageCal = sum2 / months;
+const averageRounded = Math.round(averageCal / 100) * 100;
+const averageDisplay =
+  "Average:" +
+  "  " +
+  averageRounded.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+document.write(averageDisplay);
+console.log(averageDisplay);
+
+document.write("<br>");
+
+// highest Profit
+
+let maxSale = Math.max(...finances.map((e) => e[1]));
+let profit = finances.filter((e) => e[1] === maxSale);
+const profitIncrease =
+  "Greatest Increase in Profits:" +
+  "  " +
+  profit[0].toLocaleString("en-US", { style: "currency", currency: "USD" });
+document.write(profitIncrease);
+console.log(profitIncrease);
+
+document.write("<br>");
+
+// Lowest Profit
+
+let minSale = Math.min(...finances.map((e) => e[1]));
+let loss = finances.filter((e) => e[1] === minSale);
+const profitDecrease =
+  "Greatest Decrease in Profits:" +
+  "  " +
+  loss[0].toLocaleString("en-US", { style: "currency", currency: "USD" });
+document.write(profitDecrease);
+console.log(profitDecrease);
